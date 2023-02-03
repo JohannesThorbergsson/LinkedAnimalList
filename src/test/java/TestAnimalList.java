@@ -5,8 +5,14 @@ public class TestAnimalList {
     @Test
     void TestAddAndRemove(){
         //GIVEN
-        AnimalList testList = new AnimalList(new AnimalListItem(new Animal("Puma"),(new AnimalListItem(new Animal("Giraffe")))));
-        AnimalList listExpected = new AnimalList(new AnimalListItem(new Animal("Giraffe"), new AnimalListItem(new Animal("Dog"), (new AnimalListItem(new Animal("Ape"), (new AnimalListItem(new Animal("Cat"))))))));
+        AnimalList testList = new AnimalList(
+                new AnimalListItem(new Animal("Puma"),(
+                new AnimalListItem(new Animal("Giraffe")))));
+        AnimalList listExpected = new AnimalList(
+                 new AnimalListItem(new Animal("Giraffe"),
+                 new AnimalListItem(new Animal("Dog"),
+                (new AnimalListItem(new Animal("Ape"),
+                (new AnimalListItem(new Animal("Cat"))))))));
         //WHEN
         testList.add(new Animal("Dog"));
         testList.add(new Animal("Ape"));
