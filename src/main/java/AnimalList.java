@@ -1,11 +1,12 @@
-import com.sun.source.tree.WhileLoopTree;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class AnimalList {
-     AnimalListItem head;
-
-    public AnimalList(AnimalListItem head) {
-        this.head = head;
-    }
+    private AnimalListItem head;
 
     @Override
     public String toString() {
@@ -19,33 +20,29 @@ public class AnimalList {
     }
 
     public void add(Animal added) {
-        AnimalListItem lastItem = head;
-        if (lastItem == null) {
+        AnimalListItem currentItem = head;
+        if (currentItem == null) {
             head = new AnimalListItem(added);
+        } else {
+            while (currentItem.getNext() != null) {
+                currentItem = currentItem.getNext();
+            }
+            currentItem.setNext(new AnimalListItem(added));
         }
-        while (lastItem.getNext() != null) {
-             lastItem=lastItem.getNext();
-        }
-        lastItem.setNext(new AnimalListItem(added));
     }
     public void remove (Animal removedAnimal) {
-        AnimalListItem currentItem =head;
-        while(currentItem.getNext()!=null){
-            if(currentItem.getValue().equals(removedAnimal)) {
-                currentItem.setValue(currentItem.getNext().getValue());
-                currentItem.setNext(currentItem.getNext().getNext());
-            }else if(currentItem.getNext()!=null) {
-                currentItem=currentItem.getNext();
-            }
-        }
-        AnimalListItem currentItem2 = head;
-        while(currentItem2.getNext()!=null) {
-            if(currentItem2.getNext().getNext()==null ||currentItem2.getNext().getValue().equals(removedAnimal)) {
-                currentItem2.setNext(null);
-            }
-            if(currentItem2.getNext()!=null) {
-                currentItem2=currentItem2.getNext();
-            }
-        }
+      while (head !=null && head.getValue().equals(removedAnimal)) { //check head == null?
+            head=head.getNext();
+      }
+      if (head!=null) {
+          AnimalListItem currentItem = head;
+          while (currentItem.getNext() != null) {
+              if (currentItem.getNext().getValue().equals(removedAnimal)) {
+                  currentItem.setNext(currentItem.getNext().getNext());
+              } else  {
+                  currentItem = currentItem.getNext();
+              }
+          }
+      }
     }
 }
